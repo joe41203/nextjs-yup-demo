@@ -1,9 +1,9 @@
-import type {NextPage} from "next";
+import type { NextPage } from "next";
 import React from "react";
-import {useForm, SubmitHandler} from "react-hook-form";
-import axios from "axios"
-import { useYupValidationResolver } from "../validations/useYupValidationResolver"
-import { EmailSchema } from "../validations/EmailValidator"
+import { useForm, SubmitHandler } from "react-hook-form";
+import axios from "axios";
+import { useYupValidationResolver } from "../validations/useYupValidationResolver";
+import { EmailSchema } from "../validations/EmailValidator";
 
 type Inputs = {
   email: string;
@@ -11,25 +11,25 @@ type Inputs = {
 
 const Home: NextPage = () => {
   const resolver = useYupValidationResolver(EmailSchema);
-	const {
-		register,
-		handleSubmit,
-		formState: {errors},
-	} = useForm<Inputs>({ resolver });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>({ resolver });
 
-	const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    const { email } = data
-    const res = await axios.post("/api/users", { email })
-    window.alert(res.data.message)
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    const { email } = data;
+    const res = await axios.post("/api/users", { email });
+    window.alert(res.data.message);
   };
 
-	return (
-		<form onSubmit={handleSubmit(onSubmit)}>
-			<input {...register("email")} />
-			{errors.email && <span>{errors.email.message}</span>}
-			<input type='submit' />
-		</form>
-	);
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <input {...register("email")} />
+      {errors.email && <span>{errors.email.message}</span>}
+      <input type="submit" />
+    </form>
+  );
 };
 
 export default Home;
