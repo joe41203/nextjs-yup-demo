@@ -1,0 +1,12 @@
+version: '3'
+services:
+  db:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: P@ssw0rd
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_DATABASE: nextjs-yup-demo
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./docker/mysql/config:/etc/mysql/conf.d:cached
