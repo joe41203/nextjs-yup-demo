@@ -1,6 +1,7 @@
 import type {NextPage} from "next";
 import React from "react";
 import {useForm, SubmitHandler} from "react-hook-form";
+import axios from "axios"
 
 const Home: NextPage = () => {
 	type Inputs = {
@@ -13,7 +14,12 @@ const Home: NextPage = () => {
 		watch,
 		formState: {errors},
 	} = useForm<Inputs>();
-	const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+
+	const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    const { email } = data
+    const res = await axios.post("/api/users", { email })
+    console.log("res", res)
+  };
 
 	console.log(watch("email"));
 

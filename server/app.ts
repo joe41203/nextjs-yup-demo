@@ -21,6 +21,11 @@ app.prepare().then(() => {
     res.send(JSON.stringify({ message: 'ok' }));
   });
 
+  server.post("/api/users", (req: Request, res: Response) => {
+    console.log("req.body", req.body)
+    res.send(JSON.stringify({ body: req.body, message: "ok" }))
+  })
+
   server.all('*', (req: Request, res: Response) => {
     return handle(req, res);
   });
