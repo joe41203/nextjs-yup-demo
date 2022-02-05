@@ -1,5 +1,6 @@
 import next from 'next';
 import express, { Response, Request, NextFunction } from 'express';
+import { EmailSchema } from '../validations/EmailValidator';
 
 const port = parseInt(process.env.PORT || '3000', 10);
 const dev = process.env.NODE_ENV !== 'production';
@@ -21,9 +22,19 @@ app.prepare().then(() => {
     res.send(JSON.stringify({ message: 'ok' }));
   });
 
-  server.post("/api/users", (req: Request, res: Response) => {
-    console.log("req.body", req.body)
-    res.send(JSON.stringify({ body: req.body, message: "ok" }))
+  server.post("/api/users", async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      console.log(req.body)
+      await EmailSchema.validate(req.body, { abortEarly: false })
+      res.send(JSON.stringify({ body: req.body, message: "ok" }))
+    } catch(e) {
+      return next(e)
+    }
+  })
+
+  server.use(function (err: Error, _req: Request, res: Response, next: NextFunction) {
+    res.status(403)
+    res.send(JSON.stringify({ body: { errors: err.message }, message: "Ops!!" }))
   })
 
   server.all('*', (req: Request, res: Response) => {
