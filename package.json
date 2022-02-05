@@ -2,7 +2,7 @@
   "name": "nextjs-yup-demo",
   "private": true,
   "scripts": {
-    "dev": "ts-node-dev --respawn --project tsconfig.server.json server/app.ts",
+    "dev": "ts-node --project tsconfig.server.json server/app.ts",
     "build:next": "next build",
     "build:server": "tsc --project tsconfig.server.json",
     "build": "next build",
