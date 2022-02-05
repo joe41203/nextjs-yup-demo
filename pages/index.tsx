@@ -20,7 +20,7 @@ const Home: NextPage = () => {
 	const onSubmit: SubmitHandler<Inputs> = async (data) => {
     const { email } = data
     const res = await axios.post("/api/users", { email })
-    console.log("res", res)
+    window.alert(res.data.message)
   };
 
 	return (

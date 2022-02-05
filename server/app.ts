@@ -24,9 +24,8 @@ app.prepare().then(() => {
 
   server.post("/api/users", async (req: Request, res: Response, next: NextFunction) => {
     try {
-      console.log(req.body)
       await EmailSchema.validate(req.body, { abortEarly: false })
-      res.send(JSON.stringify({ body: req.body, message: "ok" }))
+      res.send(JSON.stringify({ message: "ok" }))
     } catch(e) {
       return next(e)
     }
@@ -34,7 +33,7 @@ app.prepare().then(() => {
 
   server.use(function (err: Error, _req: Request, res: Response, next: NextFunction) {
     res.status(403)
-    res.send(JSON.stringify({ body: { errors: err.message }, message: "Ops!!" }))
+    res.send(JSON.stringify({ error: err.message }))
   })
 
   server.all('*', (req: Request, res: Response) => {
