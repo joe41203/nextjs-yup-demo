@@ -11,3 +11,11 @@
 
 <img width="750" alt="スクリーンショット 2022-02-05 19 14 15" src="https://user-images.githubusercontent.com/27882046/152637968-29440a27-5105-417a-9084-07241f58d154.png">
 <img width="728" alt="スクリーンショット 2022-02-05 19 14 24" src="https://user-images.githubusercontent.com/27882046/152637969-7a8c57a9-6a8a-4216-a646-131b0791589f.png">
+
+セットアップ
+
+```
+$ npm install
+$ npm run dev
+$ open localhost:3000
+```
